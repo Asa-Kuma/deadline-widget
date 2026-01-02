@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="widget-container">
+        <h1 class="title">Deadline</h1>
+        <div class="countdown">
+            <div class="time-block">
+                <span id="years" class="time-value">--</span>
+                <span class="time-label">年</span>
+            </div>
+            <div class="time-block">
+                <span id="months" class="time-value">--</span>
+                <span class="time-label">月</span>
+            </div>
+            <div class="time-block">
+                <span id="days" class="time-value">--</span>
+                <span class="time-label">日</span>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="percentage" class="percentage">--.-%</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
