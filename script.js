@@ -1,11 +1,16 @@
 function calculateCountdown() {
     // --- 設定項目 ---
-    const birthDate = new Date('1997-10-11T00:00:00');
-    const lifeExpectancy = 81; // 寿命
+    const birthYear = 1997;
+    const birthMonth = 10; // 10月
+    const birthDay = 11;
+    const lifeExpectancy = 80; // ★寿命を80歳に修正
     // ----------------
 
-    const endDate = new Date(birthDate);
-    endDate.setFullYear(birthDate.getFullYear() + lifeExpectancy);
+    // --- 終焉予定日を計算 ---
+    const endYear = birthYear + lifeExpectancy;
+    // JavaScriptの月は0から始まるため、10月は「9」として指定
+    const endDate = new Date(endYear, birthMonth - 1, birthDay);
+    // ---------------------------------
 
     let now = new Date();
 
@@ -14,29 +19,24 @@ function calculateCountdown() {
     let monthsLeft = endDate.getMonth() - now.getMonth();
     let daysLeft = endDate.getDate() - now.getDate();
 
-    // 月の繰り下がり処理
-    // 今の月の方が終わりの月より後の場合、または同じ月で今日の方が終わりの日より後の場合
     if (monthsLeft < 0 || (monthsLeft === 0 && daysLeft < 0)) {
         yearsLeft--;
         monthsLeft += 12;
     }
 
-    // 日の繰り下がり処理
     if (daysLeft < 0) {
-        // 1ヶ月前の月を取得し、その最終日を求めることで、正確な日数を加算
         monthsLeft--;
         const lastDayOfPreviousMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
         daysLeft += lastDayOfPreviousMonth;
     }
     
-    // もし繰り下がりの結果、月がマイナスになったら年を調整
     if (monthsLeft < 0) {
         yearsLeft--;
         monthsLeft += 12;
     }
-    // ---------------------------
 
     // 経過率の計算
+    const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
     const totalLifeInMs = endDate.getTime() - birthDate.getTime();
     const livedInMs = now.getTime() - birthDate.getTime();
     let percentageLived = (livedInMs / totalLifeInMs) * 100;
